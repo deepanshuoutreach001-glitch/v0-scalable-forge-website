@@ -1,18 +1,18 @@
 import type { Metadata } from 'next'
-import { DM_Sans, Playfair_Display } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Preloader } from '@/components/preloader'
 import './globals.css'
 
-const playfairDisplay = Playfair_Display({ 
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-sans",
   weight: ["400", "500", "600", "700", "800", "900"]
 });
 
-const dmSans = DM_Sans({ 
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-mono",
   weight: ["400", "500", "600", "700"]
 });
 
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport = {
-  themeColor: '#050607',
+  themeColor: '#040506',
   width: 'device-width',
   initialScale: 1,
 }
@@ -41,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-background">
-      <body className={`${playfairDisplay.variable} ${dmSans.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <Preloader />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
