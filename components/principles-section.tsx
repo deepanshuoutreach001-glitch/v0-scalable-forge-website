@@ -41,18 +41,18 @@ export function PrinciplesSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="principles" ref={ref} className="relative overflow-hidden py-32 md:py-40">
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-card/30" />
+    <section id="principles" ref={ref} className="relative overflow-hidden py-32 md:py-48">
+      {/* Soft divider line at top */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
       
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
         {/* Header */}
-        <div className="mb-20">
+        <div className="mb-32">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
+            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-muted"
           >
             Our Approach
           </motion.span>
@@ -61,34 +61,54 @@ export function PrinciplesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
+            className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground"
           >
             How We Think About Systems
           </motion.h2>
         </div>
 
-        {/* Principles List */}
-        <div className="grid gap-px overflow-hidden rounded-lg border border-border/50 bg-border/50 md:grid-cols-2 lg:grid-cols-3">
+        {/* Principles 3x2 Grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {principles.map((principle, index) => (
             <motion.div
               key={principle.number}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              className="group relative bg-background p-8 transition-colors duration-500 hover:bg-card"
+              className="group relative"
             >
-              {/* Number */}
-              <span className="mb-4 block font-mono text-2xl font-light text-primary/40 transition-colors group-hover:text-primary">
+              {/* Decorative number background */}
+              <div className="absolute -top-6 -left-4 font-serif text-7xl md:text-8xl font-bold text-foreground/8 select-none pointer-events-none">
                 {principle.number}
-              </span>
+              </div>
               
-              {/* Content */}
-              <h3 className="mb-3 text-lg font-medium text-foreground">
-                {principle.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {principle.description}
-              </p>
+              {/* Card */}
+              <div className="relative z-10 rounded-lg border border-foreground/10 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card/80">
+                {/* Inner glow on hover */}
+                <div className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
+                  style={{
+                    boxShadow: "inset 0 0 40px rgba(59, 130, 246, 0.05)"
+                  }}
+                />
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  {/* Number label */}
+                  <span className="mb-3 block font-mono text-sm font-medium text-primary/60 transition-colors group-hover:text-primary">
+                    {principle.number}
+                  </span>
+                  
+                  <h3 className="mb-4 text-xl font-serif font-bold text-foreground">
+                    {principle.title}
+                  </h3>
+                  <p className="text-base font-medium leading-relaxed text-foreground/70">
+                    {principle.description}
+                  </p>
+                </div>
+                
+                {/* Hover accent */}
+                <div className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-primary to-secondary transition-all duration-500 group-hover:w-full" />
+              </div>
             </motion.div>
           ))}
         </div>

@@ -10,14 +10,19 @@ export function CTASection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="contact" ref={ref} className="relative overflow-hidden py-32 md:py-40">
-      {/* Background */}
-      <div className="absolute inset-0 bg-card/50" />
+    <section id="contact" ref={ref} className="relative overflow-hidden py-32 md:py-48">
+      {/* Soft divider line at top */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+      
+      {/* Background radial gradient */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 0.1 } : {}}
-        transition={{ duration: 1 }}
-        className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[150px]"
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1.5 }}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%)",
+        }}
       />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center md:px-12 lg:px-20">
@@ -25,7 +30,7 @@ export function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
+          className="mb-6 inline-block text-xs font-medium uppercase tracking-[0.3em] text-muted"
         >
           Get Started
         </motion.span>
@@ -34,36 +39,39 @@ export function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
+          className="mb-8 font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground"
         >
           Ready to build systems
           <br />
-          that scale?
+          <span className="bg-gradient-to-r from-primary via-blue-500 to-secondary bg-clip-text text-transparent">
+            that scale?
+          </span>
         </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground"
+          className="mx-auto mb-12 max-w-2xl text-lg md:text-xl font-medium leading-relaxed text-foreground/70"
         >
-          {"Let's discuss your infrastructure challenges and explore how we can help you build for the future."}
+          Let's discuss your infrastructure challenges and explore how we can help you build for the future.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10"
         >
           <Button
             size="lg"
-            className="group bg-primary px-10 text-primary-foreground hover:bg-primary/90"
+            className="group relative px-10 h-12 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
             asChild
           >
             <a href="mailto:hello@scalableforge.com">
-              Start a Conversation
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <span className="relative z-10 flex items-center">
+                Start a Conversation
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
             </a>
           </Button>
         </motion.div>
