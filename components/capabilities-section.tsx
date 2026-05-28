@@ -87,7 +87,7 @@ export function CapabilitiesSection() {
                   {/* Inner glow effect */}
                   <div className={`absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none ${isHovered ? 'opacity-100' : ''}`}
                     style={{
-                      background: 'radial-gradient(circle at center, rgba(59, 130, 246, 0.03) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle at center, rgba(0, 255, 136, 0.08) 0%, transparent 70%)',
                     }}
                   />
                   

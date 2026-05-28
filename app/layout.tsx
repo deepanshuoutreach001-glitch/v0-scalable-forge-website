@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { DM_Sans, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { Preloader } from '@/components/preloader'
 import './globals.css'
 
 const playfairDisplay = Playfair_Display({ 
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport = {
-  themeColor: '#080a0f',
+  themeColor: '#050607',
   width: 'device-width',
   initialScale: 1,
 }
@@ -41,9 +42,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background">
       <body className={`${playfairDisplay.variable} ${dmSans.variable} font-sans antialiased`}>
+        <Preloader />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
 }
+

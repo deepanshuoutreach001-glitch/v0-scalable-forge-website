@@ -92,7 +92,7 @@ export function BuiltForScaleSection() {
                 {/* Inner glow on hover */}
                 <div className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
                   style={{
-                    boxShadow: "inset 0 0 40px rgba(59, 130, 246, 0.05)"
+                    boxShadow: "inset 0 0 40px rgba(0, 255, 136, 0.08)"
                   }}
                 />
                 

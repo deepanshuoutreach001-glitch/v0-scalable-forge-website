@@ -7,27 +7,58 @@ import { ArrowRight } from "lucide-react"
 export function HeroSection() {
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background radial gradients */}
+      {/* Background radial gradients with tech feel */}
       <div className="absolute inset-0">
-        {/* Blue radial glow - top left */}
+        {/* Primary glow - electric green */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          className="absolute -left-1/2 top-1/4 h-[900px] w-[900px] rounded-full bg-gradient-to-b from-blue-500 to-transparent blur-[180px]"
+          transition={{ duration: 2.5 }}
+          className="absolute -left-1/3 top-1/3 h-[900px] w-[900px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(0,255,136,0.15) 0%, transparent 70%)",
           }}
         />
         
-        {/* Cyan radial glow - bottom right */}
+        {/* Secondary glow - cyan */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2.5, delay: 0.3 }}
-          className="absolute -right-1/4 bottom-0 h-[800px] w-[800px] rounded-full"
+          transition={{ duration: 3, delay: 0.3 }}
+          className="absolute -right-1/4 -bottom-1/4 h-[1000px] w-[1000px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(0,217,255,0.1) 0%, transparent 70%)",
+          }}
+        />
+
+        {/* Animated tech grid lines */}
+        <motion.svg
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.03 }}
+          transition={{ duration: 2, delay: 0.5 }}
+          className="absolute inset-0 w-full h-full"
+          width="100%"
+          height="100%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern id="heroGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#heroGrid)" className="text-primary" />
+        </motion.svg>
+
+        {/* Pulsing accent orbs */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full blur-3xl pointer-events-none"
+          style={{
+            background: "linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,217,255,0.1))",
           }}
         />
       </div>
@@ -88,7 +119,7 @@ export function HeroSection() {
             style={{ letterSpacing: "-0.02em" }}
           >
             Engineering <br />
-            <span className="bg-gradient-to-r from-primary via-blue-500 to-secondary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               systems built to scale
             </span>
           </motion.h1>

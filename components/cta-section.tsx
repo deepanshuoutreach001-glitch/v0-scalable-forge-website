@@ -21,7 +21,7 @@ export function CTASection() {
         transition={{ duration: 1.5 }}
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle at center, rgba(0, 255, 136, 0.08) 0%, transparent 70%)",
         }}
       />
 
@@ -43,7 +43,7 @@ export function CTASection() {
         >
           Ready to build systems
           <br />
-          <span className="bg-gradient-to-r from-primary via-blue-500 to-secondary bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
             that scale?
           </span>
         </motion.h2>
