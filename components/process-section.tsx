@@ -31,18 +31,15 @@ export function ProcessSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="process" ref={ref} className="relative py-32 md:py-48">
-      {/* Soft divider line at top */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
-      
+    <section id="process" ref={ref} className="relative py-32 md:py-40">
       <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
         {/* Header */}
-        <div className="mb-32 text-center">
+        <div className="mb-20 text-center">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-muted"
+            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
           >
             How We Work
           </motion.span>
@@ -51,50 +48,50 @@ export function ProcessSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground"
+            className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
           >
             Our Process
           </motion.h2>
         </div>
 
-        {/* Process Timeline - Vertical on desktop */}
+        {/* Process Steps */}
         <div className="relative">
-          {/* Vertical connection line - hidden on mobile */}
-          <div className="absolute left-16 top-0 hidden h-full w-px bg-gradient-to-b from-primary/60 via-primary/20 to-transparent md:block" />
+          {/* Connection line */}
+          <div className="absolute left-8 top-0 hidden h-full w-px bg-gradient-to-b from-primary/50 via-border to-transparent md:left-1/2 md:block md:-translate-x-px" />
           
-          <div className="space-y-16 md:space-y-20">
+          <div className="space-y-12 md:space-y-24">
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                className="relative flex flex-col md:flex-row md:items-center md:gap-12"
+                className={`relative flex flex-col md:flex-row md:items-center ${
+                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                }`}
               >
-                {/* Left side: Number and line */}
-                <div className="relative mb-6 md:mb-0 md:flex-shrink-0">
-                  {/* Step number circle */}
-                  <div className="relative z-20 flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary bg-background">
-                    <span className="font-serif text-lg font-bold text-primary">{step.number}</span>
+                {/* Content */}
+                <div className={`flex-1 ${index % 2 === 0 ? "md:pr-20 md:text-right" : "md:pl-20"}`}>
+                  <span className="mb-2 block font-mono text-sm text-primary">
+                    {step.number}
+                  </span>
+                  <h3 className="mb-3 text-2xl font-light text-foreground">
+                    {step.title}
+                  </h3>
+                  <p className="max-w-md text-muted-foreground md:ml-auto md:max-w-sm">
+                    {step.description}
+                  </p>
+                </div>
+                
+                {/* Center node */}
+                <div className="relative z-10 my-4 hidden md:block">
+                  <div className="flex h-4 w-4 items-center justify-center rounded-full border border-primary bg-background">
+                    <div className="h-2 w-2 rounded-full bg-primary" />
                   </div>
                 </div>
                 
-                {/* Right side: Content */}
-                <div className="flex-1">
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
-                    className="group"
-                  >
-                    <h3 className="mb-3 font-serif text-3xl md:text-4xl font-bold text-foreground transition-colors group-hover:text-primary">
-                      {step.title}
-                    </h3>
-                    <p className="max-w-2xl text-lg font-medium leading-relaxed text-foreground/70">
-                      {step.description}
-                    </p>
-                  </motion.div>
-                </div>
+                {/* Spacer for alternating layout */}
+                <div className="hidden flex-1 md:block" />
               </motion.div>
             ))}
           </div>

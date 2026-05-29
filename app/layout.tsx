@@ -1,19 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { Preloader } from '@/components/preloader'
 import './globals.css'
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700", "800", "900"]
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["400", "500", "600", "700"]
+  variable: "--font-sans"
 });
 
 export const metadata: Metadata = {
@@ -29,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport = {
-  themeColor: '#040506',
+  themeColor: '#07090B',
   width: 'device-width',
   initialScale: 1,
 }
@@ -41,12 +33,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-background">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <Preloader />
+      <body className={`${inter.variable} font-sans antialiased`}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
 }
-
