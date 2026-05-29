@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { IntroAnimation } from "@/components/intro-animation"
+import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
 import { BuiltForScaleSection } from "@/components/built-for-scale-section"
 import { CapabilitiesSection } from "@/components/capabilities-section"
@@ -16,8 +17,13 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-background">
       {showIntro && <IntroAnimation onComplete={() => setShowIntro(false)} />}
-      
-      <div className={showIntro ? "opacity-0" : "opacity-100 transition-opacity duration-500"}>
+
+      <div
+        className={
+          showIntro ? "opacity-0" : "opacity-100 transition-opacity duration-500"
+        }
+      >
+        <SiteHeader />
         <HeroSection />
         <BuiltForScaleSection />
         <CapabilitiesSection />

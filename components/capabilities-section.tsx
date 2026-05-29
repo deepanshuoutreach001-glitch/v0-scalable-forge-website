@@ -1,8 +1,8 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { Server, Layout, Globe, Workflow } from "lucide-react"
+import { useRef } from "react"
+import { Server, Layout, Workflow, Bot } from "lucide-react"
 
 const capabilities = [
   {
@@ -18,43 +18,41 @@ const capabilities = [
     details: ["React & Next.js", "Performance Optimization", "Design Systems", "Accessibility"],
   },
   {
-    icon: Globe,
-    title: "Custom Web Systems",
-    description: "Bespoke web applications and platforms tailored to your specific business requirements and scale.",
-    details: ["Web Applications", "E-commerce Platforms", "Content Systems", "Admin Dashboards"],
+    icon: Workflow,
+    title: "Integrations & Workflows",
+    description: "Connectivity between platforms, services, and data sources—plus workflow engineering for unified operations.",
+    details: ["API Integration", "Data Synchronization", "Legacy Migration", "Workflow Automation"],
   },
   {
-    icon: Workflow,
-    title: "Systems Integration",
-    description: "Seamless connectivity between platforms, services, and data sources for unified operations.",
-    details: ["API Integration", "Data Synchronization", "Legacy Migration", "Third-party Services"],
+    icon: Bot,
+    title: "AI Automations",
+    description: "Practical automation embedded in your systems—reliable, maintainable, and built to fit your existing stack.",
+    details: ["Process Automation", "Internal Tools", "AI-Assisted Workflows", "System Orchestration"],
   },
 ]
 
 export function CapabilitiesSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-
   return (
-    <section id="capabilities" ref={ref} className="relative py-32 md:py-40">
+    <section id="capabilities" ref={ref} className="relative py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
         {/* Header */}
-        <div className="mb-20 text-center">
+        <div className="mb-14 text-center md:mb-16">
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
+            transition={{ duration: 0.4 }}
+            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-primary"
           >
             What We Build
           </motion.span>
           
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="text-balance text-3xl font-normal leading-tight text-foreground md:text-4xl lg:text-5xl"
           >
             Capabilities
           </motion.h2>
@@ -64,24 +62,15 @@ export function CapabilitiesSection() {
         <div className="grid gap-6 md:grid-cols-2">
           {capabilities.map((capability, index) => {
             const Icon = capability.icon
-            const isHovered = hoveredIndex === index
-            
             return (
               <motion.div
                 key={capability.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="group relative overflow-hidden rounded-lg border border-border/50 bg-card/50 p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card"
+                transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
+                className="group relative overflow-hidden rounded-lg border border-border/60 bg-card/50 p-8 transition-colors duration-300 hover:border-border hover:bg-card"
               >
-                {/* Glow effect */}
-                <div 
-                  className={`absolute -inset-px rounded-lg bg-gradient-to-r from-primary/10 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 ${isHovered ? 'opacity-100' : ''}`}
-                />
-                
-                <div className="relative z-10">
+                <div>
                   {/* Icon */}
                   <div className="mb-6 inline-flex rounded-lg border border-border/50 bg-background/50 p-3 transition-colors duration-300 group-hover:border-primary/30">
                     <Icon className="h-6 w-6 text-muted-foreground transition-colors group-hover:text-primary" />

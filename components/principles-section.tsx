@@ -41,40 +41,38 @@ export function PrinciplesSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="principles" ref={ref} className="relative overflow-hidden py-32 md:py-40">
-      {/* Background accent */}
+    <section id="principles" ref={ref} className="relative overflow-hidden border-t border-border/40 py-24 md:py-32">
       <div className="absolute inset-0 bg-card/30" />
       
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
-        {/* Header */}
-        <div className="mb-20">
+        <div className="mb-14 md:mb-16">
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
+            transition={{ duration: 0.4 }}
+            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-primary"
           >
             Our Approach
           </motion.span>
           
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="text-balance text-3xl font-normal leading-tight text-foreground md:text-4xl lg:text-5xl"
           >
             How We Think About Systems
           </motion.h2>
         </div>
 
         {/* Principles List */}
-        <div className="grid gap-px overflow-hidden rounded-lg border border-border/50 bg-border/50 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px overflow-hidden rounded-lg border border-border/60 bg-border/50 md:grid-cols-2 lg:grid-cols-3">
           {principles.map((principle, index) => (
             <motion.div
               key={principle.number}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+              transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
               className="group relative bg-background p-8 transition-colors duration-500 hover:bg-card"
             >
               {/* Number */}

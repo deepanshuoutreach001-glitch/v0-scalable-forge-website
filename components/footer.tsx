@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { BOOKING_URL } from "@/components/site-header"
 
 export function Footer() {
   const ref = useRef(null)
@@ -20,7 +21,7 @@ export function Footer() {
             transition={{ duration: 0.6 }}
             className="md:col-span-2"
           >
-            <div className="mb-4 text-lg font-light tracking-[0.15em] text-foreground">
+            <div className="mb-4 text-base font-medium tracking-[0.12em] text-foreground">
               SCALABLE FORGE
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -51,12 +52,12 @@ export function Footer() {
               </li>
               <li>
                 <a href="#capabilities" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                  Custom Web Systems
+                  Integrations & Workflows
                 </a>
               </li>
               <li>
                 <a href="#capabilities" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                  Systems Integration
+                  AI Automations
                 </a>
               </li>
             </ul>
@@ -73,8 +74,18 @@ export function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <a 
-                  href="mailto:hello@scalableforge.com" 
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Book a Call
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:hello@scalableforge.com"
                   className="text-sm text-muted-foreground transition-colors hover:text-primary"
                 >
                   hello@scalableforge.com

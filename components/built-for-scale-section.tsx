@@ -35,35 +35,33 @@ export function BuiltForScaleSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-32 md:py-40">
-      {/* Background */}
-      <div className="absolute inset-0 bg-card/50" />
+    <section ref={ref} className="relative overflow-hidden border-t border-border/40 py-24 md:py-32">
+      <div className="absolute inset-0 bg-card/40" />
       
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
-        {/* Header */}
-        <div className="mb-20 max-w-3xl">
+        <div className="mb-14 max-w-3xl md:mb-16">
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
+            transition={{ duration: 0.4 }}
+            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-primary"
           >
             Our Philosophy
           </motion.span>
           
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="text-balance text-3xl font-normal leading-tight text-foreground md:text-4xl lg:text-5xl"
           >
             Built for Scale
           </motion.h2>
           
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground"
           >
             Most systems break as companies grow. We build infrastructure designed 
@@ -77,10 +75,10 @@ export function BuiltForScaleSection() {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="group relative overflow-hidden border border-border/50 bg-background/50 p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card"
+              transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
+              className="group relative overflow-hidden border border-border/60 bg-background/50 p-8 transition-colors duration-300 hover:border-border hover:bg-card"
             >
               {/* Number */}
               <span className="mb-4 block font-mono text-xs text-muted-foreground">
