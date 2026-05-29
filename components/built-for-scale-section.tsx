@@ -35,18 +35,18 @@ export function BuiltForScaleSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-32 md:py-48">
-      {/* Soft divider line at top */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+    <section ref={ref} className="relative overflow-hidden py-32 md:py-40">
+      {/* Background */}
+      <div className="absolute inset-0 bg-card/50" />
       
-      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
         {/* Header */}
-        <div className="mb-32 max-w-3xl">
+        <div className="mb-20 max-w-3xl">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-muted"
+            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
           >
             Our Philosophy
           </motion.span>
@@ -55,7 +55,7 @@ export function BuiltForScaleSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground mb-6"
+            className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
           >
             Built for Scale
           </motion.h2>
@@ -64,7 +64,7 @@ export function BuiltForScaleSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl font-medium leading-relaxed text-foreground/70"
+            className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground"
           >
             Most systems break as companies grow. We build infrastructure designed 
             to scale with your business from day one—robust, maintainable, and 
@@ -73,40 +73,30 @@ export function BuiltForScaleSection() {
         </div>
 
         {/* Feature Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="group relative"
+              className="group relative overflow-hidden border border-border/50 bg-background/50 p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card"
             >
-              {/* Decorative number background */}
-              <div className="absolute -top-8 -left-2 font-serif text-8xl md:text-9xl font-bold text-foreground/5 select-none pointer-events-none">
-                {String(index + 1).padStart(2, '0')}
-              </div>
+              {/* Number */}
+              <span className="mb-4 block font-mono text-xs text-muted-foreground">
+                0{index + 1}
+              </span>
               
-              {/* Card */}
-              <div className="relative z-10 rounded-lg border border-foreground/10 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card/80">
-                {/* Inner glow on hover */}
-                <div className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
-                  style={{
-                    boxShadow: "inset 0 0 40px rgba(0, 255, 136, 0.08)"
-                  }}
-                />
-                
-                {/* Content */}
-                <h3 className="mb-4 text-xl font-serif font-bold text-foreground transition-colors group-hover:text-primary relative z-10">
-                  {feature.title}
-                </h3>
-                <p className="text-base font-medium leading-relaxed text-foreground/70 relative z-10">
-                  {feature.description}
-                </p>
-                
-                {/* Hover accent line */}
-                <div className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-primary to-secondary transition-all duration-500 group-hover:w-full" />
-              </div>
+              {/* Content */}
+              <h3 className="mb-3 text-lg font-medium text-foreground transition-colors group-hover:text-primary">
+                {feature.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {feature.description}
+              </p>
+              
+              {/* Hover accent */}
+              <div className="absolute bottom-0 left-0 h-px w-0 bg-primary transition-all duration-500 group-hover:w-full" />
             </motion.div>
           ))}
         </div>
