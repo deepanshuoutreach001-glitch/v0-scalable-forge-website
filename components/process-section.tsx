@@ -31,24 +31,23 @@ export function ProcessSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="process" ref={ref} className="relative py-32 md:py-40">
+    <section id="process" ref={ref} className="relative py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
-        {/* Header */}
-        <div className="mb-20 text-center">
+        <div className="mb-14 text-center md:mb-16">
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.3em] text-primary"
+            transition={{ duration: 0.4 }}
+            className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-primary"
           >
             How We Work
           </motion.span>
           
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-balance text-3xl font-light leading-tight text-foreground md:text-4xl lg:text-5xl"
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="text-balance text-3xl font-normal leading-tight text-foreground md:text-4xl lg:text-5xl"
           >
             Our Process
           </motion.h2>
@@ -63,9 +62,9 @@ export function ProcessSection() {
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.15 + index * 0.1 }}
                 className={`relative flex flex-col md:flex-row md:items-center ${
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
@@ -75,7 +74,7 @@ export function ProcessSection() {
                   <span className="mb-2 block font-mono text-sm text-primary">
                     {step.number}
                   </span>
-                  <h3 className="mb-3 text-2xl font-light text-foreground">
+                  <h3 className="mb-3 text-2xl font-normal text-foreground">
                     {step.title}
                   </h3>
                   <p className="max-w-md text-muted-foreground md:ml-auto md:max-w-sm">

@@ -1,18 +1,37 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { useState, useEffect } from "react"
+
+const WORDMARK = "SCALABLE FORGE"
+
+const FILL_DURATION = 2.6
+const SHEEN_DELAY = 2.0
+const HOLD_AFTER_FILL_MS = 500
+const EXIT_FADE_MS = 250
+const ON_COMPLETE_DELAY_MS = 250
 
 export function IntroAnimation({ onComplete }: { onComplete: () => void }) {
   const [isVisible, setIsVisible] = useState(true)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
+    const exitAt = prefersReducedMotion
+      ? 400
+      : FILL_DURATION * 1000 + HOLD_AFTER_FILL_MS
+
     const timer = setTimeout(() => {
       setIsVisible(false)
-      setTimeout(onComplete, 500)
-    }, 2000)
+      setTimeout(
+        onComplete,
+        prefersReducedMotion ? 150 : ON_COMPLETE_DELAY_MS,
+      )
+    }, exitAt)
     return () => clearTimeout(timer)
-  }, [onComplete])
+  }, [onComplete, prefersReducedMotion])
+
+  const wordmarkClass =
+    "text-2xl font-medium tracking-[0.12em] whitespace-nowrap md:text-3xl"
 
   return (
     <AnimatePresence>
@@ -20,89 +39,85 @@ export function IntroAnimation({ onComplete }: { onComplete: () => void }) {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
+          transition={{
+            duration: prefersReducedMotion ? 0.15 : EXIT_FADE_MS / 1000,
+            ease: "easeInOut",
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background"
         >
-          {/* Grid Background */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0 opacity-[0.03]">
-              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-                    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="1" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" className="text-foreground" />
-              </svg>
-            </div>
-            {/* Animated nodes */}
-            <motion.div
-              animate={{
-                opacity: [0.02, 0.05, 0.02],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute inset-0"
-            >
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ 
-                    opacity: [0, 0.3, 0],
-                    scale: [0.8, 1, 0.8],
-                  }}
-                  transition={{
-                    duration: 2,
-                    delay: i * 0.3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute h-1 w-1 rounded-full bg-primary"
-                  style={{
-                    left: `${20 + i * 15}%`,
-                    top: `${30 + (i % 3) * 20}%`,
-                  }}
-                />
-              ))}
-            </motion.div>
+          <div className="pointer-events-none absolute inset-0 opacity-[0.035]">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <defs>
+                <pattern id="introGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#introGrid)" className="text-foreground" />
+            </svg>
           </div>
 
-          {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative z-10 text-center"
-          >
-            <motion.h1
-              initial={{ opacity: 0, letterSpacing: "0.3em" }}
-              animate={{ opacity: 1, letterSpacing: "0.2em" }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-2xl font-light tracking-[0.2em] text-foreground md:text-3xl"
-            >
-              SCALABLE FORGE
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-4 text-sm tracking-widest text-muted-foreground"
-            >
-              Engineering systems built to scale
-            </motion.p>
-          </motion.div>
+          <div className="relative z-10 px-6">
+            {prefersReducedMotion ? (
+              <p
+                className={wordmarkClass}
+                style={{
+                  color: "var(--wordmark-fill)",
+                  textShadow: "0 0 24px oklch(0.65 0.15 240 / 0.2)",
+                }}
+              >
+                {WORDMARK}
+              </p>
+            ) : (
+              <div className="relative inline-block">
+                <span className={`${wordmarkClass} text-foreground/30`} aria-hidden>
+                  {WORDMARK}
+                </span>
 
-          {/* Loading indicator */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.8, delay: 0.2, ease: "easeInOut" }}
-            className="absolute bottom-1/3 h-px w-32 origin-left bg-primary/30"
-          />
+                <motion.div
+                  className="absolute top-0 left-0 overflow-hidden"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{
+                    duration: FILL_DURATION,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  }}
+                >
+                  <span
+                    className={`${wordmarkClass} block`}
+                    style={{
+                      color: "var(--wordmark-fill)",
+                      textShadow:
+                        "0 0 20px oklch(0.65 0.15 240 / 0.25), 0 0 40px oklch(0.65 0.15 240 / 0.12)",
+                    }}
+                  >
+                    {WORDMARK}
+                  </span>
+
+                  <motion.div
+                    className="pointer-events-none absolute inset-0 overflow-hidden"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 0.65, 0] }}
+                    transition={{
+                      duration: 0.7,
+                      delay: SHEEN_DELAY,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <motion.div
+                      className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      initial={{ left: "-40%" }}
+                      animate={{ left: "120%" }}
+                      transition={{
+                        duration: 0.75,
+                        delay: SHEEN_DELAY,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+              </div>
+            )}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
