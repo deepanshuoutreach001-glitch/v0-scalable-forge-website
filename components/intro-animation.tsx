@@ -5,11 +5,11 @@ import { useState, useEffect } from "react"
 
 const WORDMARK = "SCALABLE FORGE"
 
-const FILL_DURATION = 2.6
-const SHEEN_DELAY = 2.0
-const HOLD_AFTER_FILL_MS = 500
-const EXIT_FADE_MS = 250
-const ON_COMPLETE_DELAY_MS = 250
+const FILL_DURATION = 1.8
+const SHEEN_DELAY = 1.4
+const HOLD_AFTER_FILL_MS = 200
+const EXIT_FADE_MS = 200
+const ON_COMPLETE_DELAY_MS = 200
 
 export function IntroAnimation({ onComplete }: { onComplete: () => void }) {
   const [isVisible, setIsVisible] = useState(true)
